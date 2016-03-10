@@ -6,32 +6,25 @@ from scrapy.selector import Selector
 from tutorial.items import Website
 
 
+
 class DmozSpider(scrapy.Spider):
     name = "dmoz"
-    allowed_domains = ["dmoz.org"]
+    allowed_domains = ["www.cnblogs.com"]
     start_urls = ["http://www.cnblogs.com/artech/"]
 
-    rules = (Rule(SgmlLinkExtractor(allow=('myprogram/default.html\?page\=([\w]+)',),)),
-        Rule(SgmlLinkExtractor(allow=('myprogram/p/',)), callback='parse_item'),
-        Rule(SgmlLinkExtractor(allow=('myprogram/archive/',)), callback='parse_item'))
+    output_location = 'D:\\Crawl\\cnblog\\Artech\\'
 
     def parse(self, response):
-        filename = response.url.split("/")[-2]
+
+        s = response.url.strip('/')
+        pos = s.rfind("/")
+        filename = self.output_location + s[pos + 1:len(s) - 1]
+  
         with open(filename, 'wb') as f:
             f.write(response.body)
 
-        sel = Selector(response)
-        sites = sel.xpath('//a')
-        items = []
-
-        for sel in response.xpath('//ul/li'):
-            title = sel.xpath('a/text()').extract()
-            link = sel.xpath('a/@href').extract()
-            desc = sel.xpath('text()').extract()
-            item = Website()
-            item['name'] = title
-            item['url'] = link
-            items.append(item)
-            print title, link, desc
-
-        return items
+        sel = scrapy.Selector(response)
+        for url in response.xpath('//a/@href').extract():
+            if(url.find('artech') > 0):
+                yield scrapy.Request(url, callback=self.parse)
+         
