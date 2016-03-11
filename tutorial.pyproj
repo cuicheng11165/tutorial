@@ -13,6 +13,7 @@
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <InterpreterId>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</InterpreterId>
     <InterpreterVersion>2.7</InterpreterVersion>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -23,6 +24,9 @@
   <ItemGroup>
     <Compile Include="tutorial\items.py" />
     <Compile Include="tutorial\pipelines.py" />
+    <Compile Include="tutorial\pysql.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tutorial\settings.py" />
     <Compile Include="tutorial\spiders\dmoz_spider.py" />
     <Compile Include="tutorial\spiders\__init__.py" />
