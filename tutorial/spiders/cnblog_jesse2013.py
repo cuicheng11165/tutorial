@@ -8,10 +8,12 @@ from tutorial.items import Website
 from tutorial.crawlpolicysetting import outputlocation
 from tutorial.pymssqlhelper import pymssqlhelper
 
-class cnblog_artech(scrapy.Spider):
-    name = "artech"
+class cnblog_jesse2013(scrapy.Spider):
+    """description of class"""
+
+    name = "jesse2013"
     allowed_domains = ["www.cnblogs.com"]
-    start_urls = ["http://www.cnblogs.com/artech/"]
+    start_urls = ["http://www.cnblogs.com/"]
         
     output_location = outputlocation + '\\' + name + '\\'
 
@@ -31,17 +33,20 @@ class cnblog_artech(scrapy.Spider):
         #        with open(filename, 'wb') as f:
         #            f.write(response.body)
 
-        #if s.find('.') > 0 and s.find('?') < 0:
-        titlenodes = posttitle = response.xpath('/html/head/title').extract()
+        if s.find('.') < 0 or s.find('?') > 0:
+            return
+        
+        titlenodes = posttitle = response.xpath('/html/head/title/text()')
         if len(titlenodes) < 1:
             return
 
-        posttitle = titlenodes[0].encode('gb2312')
+        posttitle = titlenodes[0].extract().encode('gb2312')
         
-        pymssqlhelper.insertpage(response.url,str(posttitle),self.name,response.body.decode('utf8'))                          
-                                         
+        pymssqlhelper.insertpage(response.url,self.name,str(posttitle),response.body.decode('utf8'))                          
+        
+        #return                                         
         sel = scrapy.Selector(response)
         for url in response.xpath('//a/@href').extract():
-            if(url.find(self.name) > 0):
+            if(url.find('cnblogs') > 0):
                 yield scrapy.Request(url, callback=self.parse)
          

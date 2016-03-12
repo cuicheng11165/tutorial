@@ -24,9 +24,15 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="tutorial\crawlpolicysetting.py" />
     <Compile Include="tutorial\items.py" />
     <Compile Include="tutorial\pipelines.py" />
+    <Compile Include="tutorial\pymssqlhelper.py" />
     <Compile Include="tutorial\settings.py" />
+    <Compile Include="tutorial\spiders\cnblog_artech.py" />
+    <Compile Include="tutorial\spiders\cnblog_jesse2013.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tutorial\spiders\dmoz_spider.py" />
     <Compile Include="tutorial\spiders\__init__.py" />
     <Compile Include="tutorial\__init__.py" />
