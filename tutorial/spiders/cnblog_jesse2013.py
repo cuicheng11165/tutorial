@@ -1,4 +1,4 @@
-import scrapy
+﻿import scrapy
 import os
 from scrapy.spiders import Spider
 from scrapy.spiders import CrawlSpider,Rule
@@ -25,13 +25,6 @@ class cnblog_jesse2013(scrapy.Spider):
         #do not save file that already exsit
         #do not save url that has ?(query)
         #
-
-        #if s.find('?') < 0:
-        #    pos = s.rfind("/")
-        #    filename = self.output_location + s[pos + 1:len(s) - 1]
-        #    if not os.path.exists(filename):
-        #        with open(filename, 'wb') as f:
-        #            f.write(response.body)
 
         if s.find('.') < 0 or s.find('?') > 0:
             return
