@@ -9,9 +9,9 @@ from tutorial.crawlpolicysetting import outputlocation
 from tutorial.pymssqlhelper import pymssqlhelper
 
 class cnblog_artech(scrapy.Spider):
-    name = "rush"
+    name = "artech"
     allowed_domains = ["www.cnblogs.com"]
-    start_urls = ["http://www.cnblogs.com/rush"]
+    start_urls = ["http://www.cnblogs.com/artech"]
         
     output_location = outputlocation + '\\' + name + '\\'
 
