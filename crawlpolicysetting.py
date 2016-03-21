@@ -1,2 +1,0 @@
-
-outputlocation = 'D:\Crawl\cnblog'
